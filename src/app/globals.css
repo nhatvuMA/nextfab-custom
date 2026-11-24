@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-din), Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-face), var(--font-din), sans-serif;
+  --color-nf-navy: #091e28;
+  --color-nf-ink: #222222;
+  --color-nf-blue: #097ab3;
+  --color-nf-sky: #30b7ed;
+  --color-nf-ice: #96e4ff;
+  --color-nf-mist: #eef7fb;
+  --color-nf-tile: #3b9fd6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html { scroll-behavior: smooth; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: #222;
+  font-family: var(--font-sans);
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Signature NextFab button: sky→blue gradient, square corners, soft shadow */
+.nf-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  background: linear-gradient(#30b7ed 0%, #097ab3 100%);
+  color: #fff; padding: 9px 27px 12px; box-shadow: 3px 3px 6px rgba(0,0,0,.14);
+  font-weight: 500; transition: filter .15s, transform .15s; cursor: pointer;
+}
+.nf-btn:hover { filter: brightness(1.08); }
+.nf-btn:active { transform: translateY(1px); }
+.nf-btn:disabled { opacity: .55; cursor: not-allowed; filter: none; }
+.nf-btn-dark { background: #0b1d27; border-radius: 999px; padding: 14px 36px; letter-spacing: .08em; text-transform: uppercase; }
+
+.nf-dots {
+  background-color: #f7f9fa;
+  background-image: radial-gradient(#d9e2e7 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.nf-grid-bg {
+  background-color: #f9fbfc;
+  background-image: linear-gradient(#e8eef1 1px, transparent 1px), linear-gradient(90deg, #e8eef1 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.nf-outline {
+  font-family: var(--font-display);
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  text-shadow: 4px 4px 0 rgba(150, 228, 255, .25);
+}
+
+/* Form controls */
+.nf-input {
+  width: 100%; border: 1px solid #c9d3d9; background: #fff; padding: .6rem .75rem; font-size: 15px;
+  border-radius: 2px; outline: none; transition: border-color .15s, box-shadow .15s;
+}
+.nf-input:focus { border-color: #30b7ed; box-shadow: 0 0 0 3px rgba(48,183,237,.18); }
+.nf-input[aria-invalid="true"] { border-color: #d64545; }
+.nf-input:read-only { background: #f3f6f8; }
+.nf-label { display: block; font-size: 13px; font-weight: 500; color: #33424a; margin-bottom: .3rem; text-transform: uppercase; letter-spacing: .06em; }
+.nf-req::after { content: " *"; color: #d64545; }
+.nf-err { color: #c53030; font-size: 13px; margin-top: .3rem; }
